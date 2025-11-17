@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 function AdminPanel({ products, setProducts }) {
 
@@ -17,16 +16,16 @@ function AdminPanel({ products, setProducts }) {
             <a href={`/admin/edit/${product.id}`}>
               <div className="row">
                 <div className="col-4">
-                  <img src={product.image} width="100" alt={product.name} />
+                  <img src={product.image} width="120" alt={product.name} />
                 </div>
+
                 <div className="col-6">
-                  <h4>{product.name}</h4>
+                  <h3>{product.name}</h3>
                   <p>₹{product.price}</p>
                 </div>
               </div>
             </a>
 
-            {/* DELETE BUTTON --- MUST MATCH Cypress selector */}
             <button
               className="float-right"
               onClick={() => deleteProduct(product.id)}
@@ -36,10 +35,6 @@ function AdminPanel({ products, setProducts }) {
           </div>
         </div>
       ))}
-
-      <Link to="/">
-        <button className="btn">Back</button>
-      </Link>
     </div>
   );
 }
