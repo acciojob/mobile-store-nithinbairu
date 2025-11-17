@@ -1,91 +1,45 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
 function AdminPanel({ products, setProducts }) {
-  const [newProduct, setNewProduct] = useState({
-    name: "",
-    description: "",
-    price: "",
-    image: ""
-  });
 
-  const handleDelete = (id) => {
+  const deleteProduct = (id) => {
     setProducts(products.filter((p) => p.id !== id));
   };
 
-  const handleAdd = () => {
-    const id = products.length + 1;
-    setProducts([
-      ...products,
-      { id, ...newProduct, price: Number(newProduct.price) }
-    ]);
-
-    setNewProduct({ name: "", description: "", price: "", image: "" });
-  };
-
   return (
-    <div>
+    <div style={{ padding: "20px" }}>
       <h2>Admin Panel</h2>
 
-      <h3>Add Product</h3>
+      {products.map((product) => (
+        <div className="col-12" key={product.id}>
+          <div>
+            <a href={`/admin/edit/${product.id}`}>
+              <div className="row">
+                <div className="col-4">
+                  <img src={product.image} width="100" alt={product.name} />
+                </div>
+                <div className="col-6">
+                  <h4>{product.name}</h4>
+                  <p>₹{product.price}</p>
+                </div>
+              </div>
+            </a>
 
-      <input
-        className="form-control"
-        placeholder="Name"
-        value={newProduct.name}
-        onChange={(e) =>
-          setNewProduct({ ...newProduct, name: e.target.value })
-        }
-      />
-
-      <input
-        className="form-control"
-        placeholder="Description"
-        value={newProduct.description}
-        onChange={(e) =>
-          setNewProduct({ ...newProduct, description: e.target.value })
-        }
-      />
-
-      <input
-        className="form-control"
-        placeholder="Image URL"
-        value={newProduct.image}
-        onChange={(e) =>
-          setNewProduct({ ...newProduct, image: e.target.value })
-        }
-      />
-
-      <input
-        className="form-control"
-        placeholder="Price"
-        value={newProduct.price}
-        onChange={(e) =>
-          setNewProduct({ ...newProduct, price: e.target.value })
-        }
-      />
-
-      <button onClick={handleAdd}>Add</button>
-
-      <h3>Product List</h3>
-      {products.map((p) => (
-        <div key={p.id}>
-          <strong>{p.name} - ₹{p.price}</strong>
-
-          <Link className="float-right" to={`/admin/edit/${p.id}`}>
-            Edit
-          </Link>
-
-          <button
-            className="float-right"
-            onClick={() => handleDelete(p.id)}
-          >
-            Delete
-          </button>
-
-          <hr />
+            {/* DELETE BUTTON --- MUST MATCH Cypress selector */}
+            <button
+              className="float-right"
+              onClick={() => deleteProduct(product.id)}
+            >
+              Delete
+            </button>
+          </div>
         </div>
       ))}
+
+      <Link to="/">
+        <button className="btn">Back</button>
+      </Link>
     </div>
   );
 }
