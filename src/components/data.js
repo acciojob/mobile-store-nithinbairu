@@ -1,13 +1,4 @@
-import React, { useState } from "react";
-import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
-import ProductList from "./ProductList";
-import ProductDetails from "./ProductDetails";
-import AdminPanel from "./AdminPanel";
-import EditProduct from "./EditProduct";
-
-// import { mobiles as  } from "./data";
-
-const initialData = [
+const moblies = [
   {
     id: 1,
     name: "iPhone 9",
@@ -90,58 +81,3 @@ const initialData = [
     description: "ASUS ROG Strix G15 is a powerful and versatile laptop designed for gaming and productivity.ASUS ROG Strix G15 is a powerful and versatile laptop designed for gaming and productivity.ASUS ROG Strix G15 is a powerful and versatile laptop designed for gaming and productivity."
   }
 ]
-
-function App() {
-  const [products, setProducts] = useState(initialData);
-
-  return (
-    <BrowserRouter>
-      <div style={{ padding: "20px" }}>
-        <nav>
-          <Link to="/">Home</Link> |
-          <Link to="/admin"> Admin Panel</Link>
-        </nav>
-
-        <Switch>
-          <Route
-            exact
-            path="/"
-            render={(props) => <ProductList {...props} products={products} />}
-          />
-
-          <Route
-            path="/products/:id"
-            render={(props) => (
-              <ProductDetails {...props} products={products} />
-            )}
-          />
-
-          <Route
-            exact
-            path="/admin"
-            render={(props) => (
-              <AdminPanel
-                {...props}
-                products={products}
-                setProducts={setProducts}
-              />
-            )}
-          />
-
-          <Route
-            path="/admin/edit/:id"
-            render={(props) => (
-              <EditProduct
-                {...props}
-                products={products}
-                setProducts={setProducts}
-              />
-            )}
-          />
-        </Switch>
-      </div>
-    </BrowserRouter>
-  );
-}
-
-export default App;
