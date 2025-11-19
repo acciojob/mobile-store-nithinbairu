@@ -14,18 +14,21 @@ function AdminPanel({ products, setProducts }) {
       {products.map((product) => (
         <div className="col-12" key={product.id}>
           <div>
-            <Link to={`/admin/edit/${product.id}`}>
-              <div className="row">
-                <div className="col-4">
-                  <img src={product.image} width="120" alt={product.name} />
-                </div>
+            <Link
+  data-cy={`edit-btn-${product.id}`}
+  to={`/admin/edit/${product.id}`}
+>
+  <div className="row">
+    <div className="col-4">
+      <img src={product.image} width="120" alt={product.name} />
+    </div>
 
-                <div className="col-6">
-                  <h3>{product.name}</h3>
-                  <p>₹{product.price}</p>
-                </div>
-              </div>
-            </Link>
+    <div className="col-6">
+      <h3>{product.name}</h3>
+      <p>₹{product.price}</p>
+    </div>
+  </div>
+</Link>
 
             <button
               data-cy={`delete-btn-${product.id}`}
