@@ -31,7 +31,11 @@ function EditProduct({ match, products, setProducts }) {
         }
       />
 
-      <button className="float-right" onClick={handleSave}>
+      <button
+        data-cy="save-btn"
+        className="float-right"
+        onClick={handleSave}
+      >
         Save
       </button>
 
