@@ -28,11 +28,11 @@ function AdminPanel({ products, setProducts }) {
             </Link>
 
             <button
-              className="float-right"
-              onClick={() => deleteProduct(product.id)}
-            >
-              Delete
-            </button>
+  className={`delete-btn delete-${product.id}`}
+  onClick={() => deleteProduct(product.id)}
+>
+  Delete
+</button>
           </div>
         </div>
       ))}
