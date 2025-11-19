@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 function ProductList({ products }) {
+  // console.log(products);
   return (
     <div>
       <h2>Mobile Store</h2>

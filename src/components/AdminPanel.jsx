@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function AdminPanel({ products, setProducts }) {
 
@@ -13,7 +14,7 @@ function AdminPanel({ products, setProducts }) {
       {products.map((product) => (
         <div className="col-12" key={product.id}>
           <div>
-            <a href={`/admin/edit/${product.id}`}>
+            <Link to={`/admin/edit/${product.id}`}>
               <div className="row">
                 <div className="col-4">
                   <img src={product.image} width="120" alt={product.name} />
@@ -24,7 +25,7 @@ function AdminPanel({ products, setProducts }) {
                   <p>₹{product.price}</p>
                 </div>
               </div>
-            </a>
+            </Link>
 
             <button
               className="float-right"

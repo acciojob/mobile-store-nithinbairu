@@ -1,4 +1,4 @@
-const moblies = [
+export const moblies = [
   {
     id: 1,
     name: "iPhone 9",

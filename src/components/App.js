@@ -1,45 +1,50 @@
 import React, { useState } from "react";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 
 import ProductList from "./ProductList";
 import ProductDetails from "./ProductDetails";
 import AdminPanel from "./AdminPanel";
 import EditProduct from "./EditProduct";
+import { moblies } from "./data";
 
-import { mobiles as initialData } from "./data";
+export default function App() {
+const [products, setProducts] = useState(moblies);
 
-function App() {
-  const [products, setProducts] = useState(initialData);
+return ( <Router>
+<div style={{ padding: "20px" }}> <h1>Mobile Store</h1>
 
-  return (
-    <BrowserRouter>
-      <div style={{ padding: "20px" }}>
-        <nav>
-          <Link to="/">Home</Link> |
-          <Link to="/admin"> Admin Panel</Link>
-        </nav>
 
-        <Routes>
-          <Route path="/" element={<ProductList products={products} />} />
+    <nav>
+      <Link to="/">Home</Link> |{" "}
+      <Link to="/admin">Admin Panel</Link>
+    </nav>
 
-          <Route
-            path="/products/:id"
-            element={<ProductDetails products={products} />}
-          />
+    <hr />
 
-          <Route
-            path="/admin"
-            element={<AdminPanel products={products} setProducts={setProducts} />}
-          />
+    <Switch>
+      <Route exact path="/"
+        render={()=><ProductList products={products} />}>
+      </Route>
 
-          <Route
-            path="/admin/edit/:id"
-            element={<EditProduct products={products} setProducts={setProducts} />}
-          />
-        </Routes>
-      </div>
-    </BrowserRouter>
-  );
+      <Route
+  path="/products/:id"
+  render={(routeProps) => (
+    <ProductDetails {...routeProps} products={products} />
+  )}
+/>
+
+
+      <Route exact path="/admin"
+        render={()=><AdminPanel products={products} setProducts={setProducts}/>} />
+      
+
+      <Route path="/admin/edit/:id"
+        render={(routeProps)=><EditProduct {...routeProps} products={products} setProducts={setProducts} />}></Route>
+      
+    </Switch>
+  </div>
+</Router>
+
+
+);
 }
-
-export default App;
